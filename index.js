@@ -1,4 +1,3 @@
-require('dotenv').config();
 const chatbotToggler = document.querySelector(".chatbot-toggler");
 const closeBtn = document.querySelector(".close-btn");
 const chatbox = document.querySelector(".chatbox");
@@ -6,7 +5,7 @@ const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
 
 let userMessage = null;
-const API_KEY = "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";
+const API_KEY = "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";
 const inputInitHeight = chatInput.scrollHeight;
 
 const createChatLi = (message, className) => {
@@ -34,8 +33,10 @@ const generateResponse = (chatElement) => {
         })
     }
     fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
+        // console.log(data);
         messageElement.textContent = data.choices[0].message.content.trim();
-    }).catch(() => {
+    }).catch((err) => {
+        // console.log(err);
         messageElement.classList.add("error");
         messageElement.textContent = "Oops! Something went wrong. Please try again.";
     }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
